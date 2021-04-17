@@ -9,11 +9,9 @@ class Downloader:
     def __init__(self):
         self.audio_downloader = YoutubeDL({'format':'bestaudio'})
 
-    def download(self):
+    def download(self, URL):
         try:
-            print('Youtube Downloader'.center(40, '_'))
-            URL = input('Enter youtube url :  ')
-            audio_downloader.extract_info(URL)
+            self.audio_downloader.extract_info(URL)
 
             if (not os.path.exists("songs")):
                 os.mkdir("songs")
@@ -21,9 +19,9 @@ class Downloader:
             for (dirpath, dirnames, filenames) in walk("."):
                 for f in filenames:
                     if (f.split(".")[-1] == "webm"):
-                        move(f, "songs/" + f)
-                    if (f.split(".")[-1] == "m4a"):
                         os.remove(f)
+                    if (f.split(".")[-1] == "m4a"):
+                        move(f, "songs/" + f)
                 break
 
         except Exception:
